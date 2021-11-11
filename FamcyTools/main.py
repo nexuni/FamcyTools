@@ -9,9 +9,6 @@ def command_line_interface(args=None, arglist=None):
     args, arglist are used for unit testing
     """
 
-    raw_version = pkg_resources.require("Famcy")[0].version
-    version = '%s' % (raw_version)
-
     help_text = """
 Example commands:
     init           : Initialize all necessary folders and path
