@@ -3,10 +3,6 @@ import argparse
 import subprocess
 import pkg_resources
 
-# ----------------------------------------------------------------------------
-
-from Famcy import __codename__ as codename
-
 def command_line_interface(args=None, arglist=None):
     """
     Main Famcy command line entry point
@@ -14,7 +10,7 @@ def command_line_interface(args=None, arglist=None):
     """
 
     raw_version = pkg_resources.require("Famcy")[0].version
-    version = '%s ("%s")' % (raw_version, codename)
+    version = '%s' % (raw_version)
 
     help_text = """
 Example commands:
