@@ -11,6 +11,7 @@ if [ "$ver" -lt "37" ]; then
 fi
 
 mkdir -p ~/.local/share/famcy/$1
+mkdir -p ~/.local/share/famcy/$1/logs
 cd ~/.local/share/famcy/$1
 python3 -m venv venv
 source venv/bin/activate

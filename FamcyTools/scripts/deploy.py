@@ -18,8 +18,8 @@ die-on-term = true
 enable-threads = true
 single-interpreter = true
 http-websockets = true
-log-reopen = true
-daemonize = %s""" % (args[1], LOCAL_USER + "/" + args[0] + "/logs/" + """/famcy-log-@(exec://date +%%Y-%%m-%%d).log""")
+logto = %s
+log-maxsize = 2048""" % (args[1], LOCAL_USER + "/" + args[0] + "/logs/" + """/famcy.log""")
 
 	f = open(FamcyTools.FAMCY_DIR % (FamcyTools.USERNAME, args[0]) + "/famcy.ini", "w")
 	f.write(content)
