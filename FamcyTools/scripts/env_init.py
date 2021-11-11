@@ -3,5 +3,5 @@ import FamcyTools
 
 def main(args):
 	famcy_id = args[0]
-	init_script_output = subprocess.check_output(["bash", FamcyTools.FAMCY_DIR % (USERNAME, args[0])+"/scripts/bash/"+"init.sh", famcy_id]) 
+	init_script_output = subprocess.check_output(["bash", FamcyTools.FAMCY_DIR % (FamcyTools.USERNAME, args[0])+"/scripts/bash/"+"init.sh", famcy_id]) 
 	print("[Famcy Init] ", init_script_output.decode())

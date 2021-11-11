@@ -1,13 +1,8 @@
 import os
 import sys
-import pwd
 import subprocess
 import FamcyTools
 
-def get_username():
-    return pwd.getpwuid(os.getuid())[0]
-
-USERNAME = get_username()
 LOCAL_USER = "/home/%U/.local/share/famcy"
 
 def main(args):
@@ -26,7 +21,7 @@ http-websockets = true
 log-reopen = true
 daemonize = %s""" % (args[1], LOCAL_USER + "/" + args[0] + "/logs/" + """/famcy-log-@(exec://date +%%Y-%%m-%%d).log""")
 
-	f = open(FamcyTools.FAMCY_DIR % (USERNAME, args[0]) + "/famcy.ini", "w")
+	f = open(FamcyTools.FAMCY_DIR % (FamcyTools.USERNAME, args[0]) + "/famcy.ini", "w")
 	f.write(content)
 	f.close()
 	
@@ -38,7 +33,7 @@ app = create_app('%s',True)
 if __name__ == "__main__":
     app.run()"""% (args[0])
 
-	f = open(FamcyTools.FAMCY_DIR % (USERNAME, args[0]) + "/wsgi.py", "w")
+	f = open(FamcyTools.FAMCY_DIR % (FamcyTools.USERNAME, args[0]) + "/wsgi.py", "w")
 	f.write(content)
 	f.close()
 
@@ -58,7 +53,7 @@ ExecStart=/home/%s/.local/share/famcy/%s/venv/bin/uwsgi --ini famcy.ini --lazy
 
 [Install]
 WantedBy=multi-user.target
-""" % (USERNAME, USERNAME, args[0], USERNAME, args[0], USERNAME, args[0]))
+""" % (FamcyTools.USERNAME, FamcyTools.USERNAME, args[0], FamcyTools.USERNAME, args[0], FamcyTools.USERNAME, args[0]))
 
 	print()
 	print("== Copy the following part to nginx configurations == (Need to change alias path if necessary)")
@@ -73,5 +68,5 @@ location / {
 location /static  {
     alias /home/%s/.local/share/famcy/%s/venv/lib/python3.7/site-packages/Famcy/static;
 }
-""" % (args[1], USERNAME, args[0]))
+""" % (args[1], FamcyTools.USERNAME, args[0]))
 	print("Deployed to wsgi")
