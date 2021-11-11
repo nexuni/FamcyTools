@@ -9,8 +9,6 @@ def get_username():
 
 USERNAME = get_username()
 LOCAL_USER = "/home/%U/.local/share/famcy"
-# TODO: in the future, this needs to be more modular
-FAMCY_DIR = "/home/%s/.local/share/famcy/%s/venv/lib/python3.7/site-packages/Famcy"
 
 def main(args):
 	# Write famcy.ini
@@ -28,7 +26,7 @@ http-websockets = true
 log-reopen = true
 daemonize = %s""" % (args[1], LOCAL_USER + "/" + args[0] + "/logs/" + """/famcy-log-@(exec://date +%%Y-%%m-%%d).log""")
 
-	f = open(FAMCY_DIR % (USERNAME, args[0]) + "/famcy.ini", "w")
+	f = open(FamcyTools.FAMCY_DIR % (USERNAME, args[0]) + "/famcy.ini", "w")
 	f.write(content)
 	f.close()
 	
@@ -40,7 +38,7 @@ app = create_app('%s',True)
 if __name__ == "__main__":
     app.run()"""% (args[0])
 
-	f = open(FAMCY_DIR % (USERNAME, args[0]) + "/wsgi.py", "w")
+	f = open(FamcyTools.FAMCY_DIR % (USERNAME, args[0]) + "/wsgi.py", "w")
 	f.write(content)
 	f.close()
 
