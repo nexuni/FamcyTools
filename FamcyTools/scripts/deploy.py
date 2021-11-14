@@ -9,17 +9,17 @@ def main(args):
 	# Write famcy.ini
 	content = """[uwsgi]
 module = wsgi:app
-master = true
+master = false
 processes = 5
-http-socket = :%s
+socket = /tmp/%s.sock
 chmod-socket = 660
 vacuum = true
 die-on-term = true
 enable-threads = true
 single-interpreter = true
-http-websockets = true
+http-websockets = false
 logto = %s
-log-maxsize = 2048000""" % (args[1], LOCAL_USER + "/" + args[0] + "/logs" + """/famcy.log""")
+log-maxsize = 2048000""" % (args[0], LOCAL_USER + "/" + args[0] + "/logs" + """/famcy.log""")
 
 	f = open(FamcyTools.FAMCY_DIR % (FamcyTools.USERNAME, args[0]) + "/famcy.ini", "w")
 	f.write(content)
@@ -59,14 +59,12 @@ WantedBy=multi-user.target
 	print("== Copy the following part to nginx configurations == (Need to change alias path if necessary)")
 	print("""
 location / {
-    proxy_set_header X-Forward-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $http_host;
-    proxy_redirect off;
-    proxy_pass http://127.0.0.1:%s;
+	include uwsgi_params;
+	uwsgi_pass unix:/tmp/%s.sock;
 }
 
 location /static  {
     alias /home/%s/.local/share/famcy/%s/venv/lib/python3.7/site-packages/Famcy/static;
 }
-""" % (args[1], FamcyTools.USERNAME, args[0]))
+""" % (args[0], FamcyTools.USERNAME, args[0]))
 	print("Deployed to wsgi")
