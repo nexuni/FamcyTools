@@ -9,7 +9,7 @@ def main(args):
 	# Write famcy.ini
 	content = """[uwsgi]
 module = wsgi:app
-master = false
+master = true
 processes = 5
 socket = /tmp/%s.sock
 chmod-socket = 660
