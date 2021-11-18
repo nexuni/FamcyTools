@@ -10,7 +10,7 @@ def main(args):
 	content = """[uwsgi]
 module = wsgi:app
 master = true
-processes = 5
+processes = 1
 socket = /tmp/%s.sock
 chmod-socket = 660
 vacuum = true
