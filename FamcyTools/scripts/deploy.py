@@ -10,7 +10,7 @@ def main(args):
 	content = """[uwsgi]
 module = wsgi:app
 master = true
-processes = 1
+processes = 5
 socket = /tmp/%s.sock
 chmod-socket = 660
 vacuum = true
@@ -49,7 +49,7 @@ User=%s
 Group=www-data
 WorkingDirectory=/home/%s/.local/share/famcy/%s/venv/lib/python3.7/site-packages/Famcy
 Environment="PATH=/home/%s/.local/share/famcy/%s/venv/bin"
-ExecStart=/home/%s/.local/share/famcy/%s/venv/bin/uwsgi --ini famcy.ini --lazy
+ExecStart=/home/%s/.local/share/famcy/%s/venv/bin/uwsgi --ini famcy.ini
 
 [Install]
 WantedBy=multi-user.target
