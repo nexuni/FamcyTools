@@ -4,16 +4,17 @@ if ! hash python3; then
     exit 1
 fi
 
-ver=$(python3 -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\2/')
+ver=$(python3.7 -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\2/')
 if [ "$ver" -lt "37" ]; then
     echo "Famcy requires python 3.7 or greater"
     exit 1
 fi
 
+echo "Forcing Python 3.7 Installation...."
 mkdir -p ~/.local/share/famcy/$1
 mkdir -p ~/.local/share/famcy/$1/logs
 cd ~/.local/share/famcy/$1
-python3 -m venv venv
+python3.7 -m venv venv
 source venv/bin/activate
 pip3 install wheel uwsgi
 pip3 install setuptools-rust
