@@ -38,7 +38,7 @@ Example commands:
         from FamcyTools.scripts import env_init
         env_init.main(args.args)
 
-    elif args.command == "start":
+    elif args.command == "run":
         from FamcyTools.scripts import start
         start.main(args.args)
 
