@@ -3,7 +3,7 @@ import sys
 import subprocess
 import FamcyTools
 
-LOCAL_USER = "/home/%U/.local/share/famcy"
+LOCAL_USER = FamcyTools.HOME_DIR+"/.local/share/famcy"
 
 def main(args):
 	# Write famcy.ini
@@ -21,7 +21,7 @@ http-websockets = false
 logto = %s
 log-maxsize = 2048000""" % (args[0], LOCAL_USER + "/" + args[0] + "/logs" + """/famcy.log""")
 
-	f = open(FamcyTools.FAMCY_DIR % (FamcyTools.USERNAME, args[0]) + "/famcy.ini", "w")
+	f = open(FamcyTools.FAMCY_DIR % (args[0]) + "/famcy.ini", "w")
 	f.write(content)
 	f.close()
 	
@@ -33,7 +33,7 @@ app = create_app('%s',True)
 if __name__ == "__main__":
     app.run()"""% (args[0])
 
-	f = open(FamcyTools.FAMCY_DIR % (FamcyTools.USERNAME, args[0]) + "/wsgi.py", "w")
+	f = open(FamcyTools.FAMCY_DIR % (args[0]) + "/wsgi.py", "w")
 	f.write(content)
 	f.close()
 
@@ -47,13 +47,13 @@ After=network.target
 [Service]
 User=%s
 Group=www-data
-WorkingDirectory=/home/%s/.local/share/famcy/%s/venv/lib/python3.7/site-packages/Famcy
-Environment="PATH=/home/%s/.local/share/famcy/%s/venv/bin"
-ExecStart=/home/%s/.local/share/famcy/%s/venv/bin/uwsgi --ini famcy.ini
+WorkingDirectory=%s/.local/share/famcy/%s/venv/lib/python3.7/site-packages/Famcy
+Environment="PATH=%s/.local/share/famcy/%s/venv/bin"
+ExecStart=%s/.local/share/famcy/%s/venv/bin/uwsgi --ini famcy.ini
 
 [Install]
 WantedBy=multi-user.target
-""" % (FamcyTools.USERNAME, FamcyTools.USERNAME, args[0], FamcyTools.USERNAME, args[0], FamcyTools.USERNAME, args[0]))
+""" % (FamcyTools.USERNAME, FamcyTools.HOME_DIR, args[0], FamcyTools.HOME_DIR, args[0], FamcyTools.HOME_DIR, args[0]))
 
 	print()
 	print("== Copy the following part to nginx configurations == (Need to change alias path if necessary)")
@@ -64,7 +64,7 @@ location / {
 }
 
 location /static  {
-    alias /home/%s/.local/share/famcy/%s/venv/lib/python3.7/site-packages/Famcy/static;
+    alias %s/.local/share/famcy/%s/venv/lib/python3.7/site-packages/Famcy/static;
 }
-""" % (args[0], FamcyTools.USERNAME, args[0]))
+""" % (args[0], FamcyTools.HOME_DIR, args[0]))
 	print("Deployed to wsgi")
