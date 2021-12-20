@@ -18,8 +18,7 @@ die-on-term = true
 enable-threads = true
 single-interpreter = true
 http-websockets = false
-logto = %s
-log-maxsize = 2048000""" % (args[0], LOCAL_USER + "/" + args[0] + "/logs" + """/famcy.log""")
+""" % (args[0])
 
 	f = open(FamcyTools.FAMCY_DIR % (args[0]) + "/famcy.ini", "w")
 	f.write(content)
