@@ -1,5 +1,5 @@
 # FAMCY Tools Documentation
-Famcy is an Automatic Management Console for You (FAMCY). It is designed for Nexuni Management Console development. It is based in Flask framework and contains various useful plugins for backend management and user dashboard actions. This repository contains tools to initialize and configure famcy environment. 
+Famcy is an All-round Management Console for You (FAMCY). It is designed for Nexuni Management Console development. It is based in Flask framework and contains various useful plugins for backend management and user dashboard actions. This repository contains tools to initialize and configure famcy environment. 
 
 ## Installation
 1. 在本機 安裝 famcytools (pip3 install famcytools)
