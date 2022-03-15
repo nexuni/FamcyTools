@@ -1,1 +1,1 @@
-gadgethiServerUtils==version.standalone
+gadgethiServerUtils==999.999
