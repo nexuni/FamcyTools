@@ -1,1 +1,1 @@
-gadgethiServerUtils
+gadgethiServerUtils==version.standalone
