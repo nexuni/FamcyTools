@@ -30,7 +30,7 @@ http-websockets = false
 app = create_app('%s',True)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8888)"""% (args[0])
+    app.run(host="0.0.0.0", port=8888, processes=3)"""% (args[0])
 
 	f = open(FamcyTools.FAMCY_DIR % (args[0]) + "/wsgi.py", "w")
 	f.write(content)
