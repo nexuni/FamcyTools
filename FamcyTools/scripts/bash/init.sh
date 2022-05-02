@@ -5,12 +5,11 @@ if ! hash python3; then
 fi
 
 ver=$(python3 -V 2>&1 | sed 's/.* \([0-9]\).\([0-9]\).*/\1\2/')
-if [ "$ver" -lt "37" ]; then
-    echo "Famcy requires python 3.7 or greater"
+if [ "$ver" -lt "36" ]; then
+    echo "Famcy requires python 3.6 or greater"
     exit 1
 fi
 
-echo "Forcing Python 3.7 Installation...."
 mkdir -p ~/.local/share/famcy/$1
 mkdir -p ~/.local/share/famcy/$1/logs
 cd ~/.local/share/famcy/$1
